@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ブロブモーフィング — Animation Studies</title>
+  <meta name="description" content="SVG path を時間ノイズ + カーソル近接で連続変形させる有機的なヒーロー。架空会話 AI「SYNCH」の listening / thinking / speaking 状態に同期して呼吸する blob で実用例を提示。" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="site">
+  <a class="back" href="../">
+    <span class="arrow">←</span>
+    <span>ANIMATION · INDEX</span>
+  </a>
+  <span class="cell-marker">BLOB MORPH</span>
+</header>
+
+<main>
+
+  <!-- ─── intro ─── -->
+  <section class="intro">
+    <span class="kicker">SYNCH · conversational AI</span>
+    <h1>Voice that listens.<br/>Form that responds.</h1>
+    <p class="lead">SVG path を時間ノイズで連続変形させ、カーソル近接で形が膨らむ有機的なヒーロー。架空会話 AI <strong>SYNCH</strong> の listening / thinking / speaking という 3 状態を blob の形・色・速さで表現する実用例。</p>
+  </section>
+
+  <!-- ─── The Reusable Component（multi-layer blob + SYNCH product UI） ─── -->
+  <section class="synch"
+           data-blob
+           data-blob-points="12"
+           data-blob-radius="120"
+           data-blob-amp="22"
+           data-blob-cursor="38">
+
+    <!-- SYNCH brand masthead -->
+    <header class="sy-masthead">
+      <div class="sy-mark">
+        <span class="sy-glyph" aria-hidden="true">
+          <span class="sy-glyph-d"></span>
+          <span class="sy-glyph-arc"></span>
+        </span>
+        <span class="sy-name">SYNCH</span>
+        <span class="sy-ver">v2.4 · beta</span>
+      </div>
+      <div class="sy-status" data-status>
+        <span class="sy-dot" aria-hidden="true"></span>
+        <span class="sy-state" data-state-label>LISTENING</span>
+        <span class="sy-uptime">99.98% · 0.31s avg</span>
+      </div>
+    </header>
+
+    <!-- 黒ステージ -->
+    <div class="sy-stage">
+
+      <!-- 左：blob -->
+      <div class="sy-blobs" data-blob-host>
+        <svg class="sy-blob sy-blob--outer" viewBox="-200 -200 400 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="g-outer" cx="40%" cy="40%" r="65%">
+              <stop offset="0%"   stop-color="#ff2d55" stop-opacity="1"/>
+              <stop offset="55%"  stop-color="#a833ff" stop-opacity=".85"/>
+              <stop offset="100%" stop-color="#0066ff" stop-opacity=".7"/>
+            </radialGradient>
+            <filter id="blur-outer" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="6"/>
+            </filter>
+          </defs>
+          <path data-blob-path data-blob-role="outer" fill="url(#g-outer)" filter="url(#blur-outer)"/>
+        </svg>
+
+        <svg class="sy-blob sy-blob--inner" viewBox="-200 -200 400 400" aria-hidden="true">
+          <defs>
+            <radialGradient id="g-inner" cx="38%" cy="36%" r="70%">
+              <stop offset="0%"   stop-color="#ffffff" stop-opacity=".95"/>
+              <stop offset="30%"  stop-color="#ffeaef" stop-opacity=".85"/>
+              <stop offset="75%"  stop-color="#ff2d55" stop-opacity=".75"/>
+              <stop offset="100%" stop-color="#5e0040" stop-opacity=".4"/>
+            </radialGradient>
+          </defs>
+          <path data-blob-path data-blob-role="inner" fill="url(#g-inner)"/>
+        </svg>
+
+        <!-- 状態ラベル（blob の中央） -->
+        <div class="sy-statepill" data-statepill>
+          <span class="sp-bar" aria-hidden="true"></span>
+          <span class="sp-text" data-statepill-text>idle</span>
+        </div>
+      </div>
+
+      <!-- 右：text + CTA + metrics -->
+      <div class="sy-text">
+        <h2 class="sy-h">
+          <em>The shape</em> of<br/>
+          the answer<br/>
+          before <em>the words</em>.
+        </h2>
+        <p class="sy-lead">SYNCH は会話を「形」で返す。声が届くと blob が listening に。考え始めると thinking に乱れ、応答が紡がれる瞬間に speaking として外側へ広がる。インターフェースが「いまここで何が起きているか」を語り続ける。</p>
+
+        <div class="sy-cta">
+          <button class="cta cta--solid" type="button">TRY&nbsp;SYNCH <span class="cta-arrow">→</span></button>
+          <button class="cta" type="button">API DOCS</button>
+        </div>
+
+        <ul class="sy-metrics">
+          <li><strong>47</strong><span>languages</span></li>
+          <li><strong>0.31<i>s</i></strong><span>avg response</span></li>
+          <li><strong>2.1<i>M</i></strong><span>conversations / day</span></li>
+          <li><strong>99.98<i>%</i></strong><span>uptime · 30d</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <!-- 会話パネル（自動循環） -->
+    <section class="sy-chat" data-chat aria-label="example conversation">
+      <header class="sy-chat-head">
+        <span class="sy-chat-title">CONVERSATION · LIVE PREVIEW</span>
+        <span class="sy-chat-meta">
+          <span data-chat-counter>01 / 04</span>
+          <span class="sy-chat-tick" aria-hidden="true"></span>
+        </span>
+      </header>
+
+      <div class="sy-chat-body" data-chat-body>
+
+        <article class="turn is-active" data-turn="0">
+          <p class="msg msg--user"><span class="msg-who">YOU</span>What does inertia feel like?</p>
+          <p class="msg msg--ai"><span class="msg-who">SYNCH</span>Like resisting your past self. A train that hasn&rsquo;t decided to stop.</p>
+        </article>
+
+        <article class="turn" data-turn="1">
+          <p class="msg msg--user"><span class="msg-who">YOU</span>Translate &ldquo;忍耐&rdquo; into a metaphor.</p>
+          <p class="msg msg--ai"><span class="msg-who">SYNCH</span>A river smoothing its own bed. Becoming what it carves.</p>
+        </article>
+
+        <article class="turn" data-turn="2">
+          <p class="msg msg--user"><span class="msg-who">YOU</span>Why do birds line up on wires?</p>
+          <p class="msg msg--ai"><span class="msg-who">SYNCH</span>Heat. Predator angle. Sometimes &mdash; just opinion.</p>
+        </article>
+
+        <article class="turn" data-turn="3">
+          <p class="msg msg--user"><span class="msg-who">YOU</span>Compose a one-line poem.</p>
+          <p class="msg msg--ai"><span class="msg-who">SYNCH</span>The kettle remembers being water.</p>
+        </article>
+
+        <!-- typing indicator（thinking 中に表示） -->
+        <div class="sy-typing" data-typing>
+          <span class="ty-who">SYNCH</span>
+          <span class="ty-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="ty-label">is thinking…</span>
+        </div>
+      </div>
+
+      <footer class="sy-chat-foot">
+        <span>auto-cycle · 6s</span>
+        <span data-chat-progress class="sy-chat-progress" aria-hidden="true"><i></i></span>
+        <button class="sy-chat-skip" type="button" data-chat-skip aria-label="skip to next">SKIP →</button>
+      </footer>
+    </section>
+
+    <!-- フッターメタ（SYNCH 規模感を最後に念押し） -->
+    <footer class="sy-foot">
+      <span>SYNCH AI — built in 2026 — trained on multilingual literary corpus</span>
+      <span>STATUS: <em data-foot-state>operational</em></span>
+    </footer>
+
+  </section>
+
+  <!-- ─── Usage notes ─── -->
+  <section class="notes">
+    <div class="shou"><h2>使い方</h2><span class="no">— USAGE</span></div>
+    <p class="frame">↑ 想定：AI / 音声 / 音楽プロダクトのヒーロー、ロード中ステータス、空白時間のフィラー。形が変わり続けることそのものが「ここはまだ生きている」というシグナルになる場面で。</p>
+
+    <div class="notes-grid">
+      <div class="note">
+        <span class="note-no">01</span>
+        <h3>2 ファイルをコピー</h3>
+        <p><code>style.css</code> の <code>/* ─── COMPONENT ─── */</code> ブロックと、<code>script.js</code> の IIFE 全体を移植先へ。外部依存ゼロ。</p>
+      </div>
+      <div class="note">
+        <span class="note-no">02</span>
+        <h3>data-blob で宣言</h3>
+        <p>ルート要素に <code>data-blob</code>、内部の SVG <code>&lt;path&gt;</code> に <code>data-blob-path</code> を付ければ自動初期化。<code>data-blob-points</code>（制御点数）、<code>data-blob-radius</code>（基準半径）、<code>data-blob-amp</code>（揺らぎ振幅）、<code>data-blob-cursor</code>（カーソル影響半径）で調整。</p>
+      </div>
+      <div class="note">
+        <span class="note-no">03</span>
+        <h3>setState / beat API</h3>
+        <p><code>el._blob.setState('thinking')</code> / <code>('speaking')</code> / <code>('listening')</code> で挙動を切替。<code>el._blob.beat()</code> で一発の脈動を加える（外側への膨張 → 減衰）。</p>
+      </div>
+    </div>
+
+    <h3 class="sub-h">CSS 変数 / データ属性</h3>
+    <div class="vars">
+      <div class="var"><code>data-blob-points</code><span>制御点の数（多いほど滑らか）</span><em>12</em></div>
+      <div class="var"><code>data-blob-radius</code><span>blob の基準半径（viewBox 単位）</span><em>120</em></div>
+      <div class="var"><code>data-blob-amp</code><span>各点の最大変位（揺らぎ）</span><em>22</em></div>
+      <div class="var"><code>data-blob-cursor</code><span>カーソル近接で点が引き寄せられる強度</span><em>38</em></div>
+    </div>
+
+    <h3 class="sub-h">アクセシビリティ</h3>
+    <ul class="a11y">
+      <li><code>prefers-reduced-motion: reduce</code> 時は連続変形を止め、静的な blob 形状にする（パルスのみ残す）。</li>
+      <li>会話パネルは <code>aria-live=&quot;polite&quot;</code> を将来追加可能だが、本デモは「装飾」扱いのため省略。</li>
+      <li>SKIP ボタンでユーザーが循環を能動操作可能。</li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  <span>© 2026 ANIMATION DESIGN STUDY</span>
+  <a href="../">← INDEX</a>
+</footer>
+
+<script src="./script.js"></script>
+</body>
+</html>
