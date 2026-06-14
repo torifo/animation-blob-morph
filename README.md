@@ -14,6 +14,22 @@
 | 依存 | なし（Pure HTML + CSS + Vanilla JS、SVG のみ） |
 | 推奨配置 | AI／音声／音楽プロダクトのヒーロー、ロード中ステータス、空白時間のフィラー |
 
+## スキルとして導入 / Install as a skill
+
+このリポジトリは Claude Code / Codex CLI 共通の **`SKILL.md`**（オープン標準）を同梱しており、AI エージェントのスキルとして使えます。リポジトリ自体をスキルディレクトリへリンクするだけです。
+
+This repo ships a cross-agent **`SKILL.md`** (open standard) usable by both Claude Code and Codex CLI. Just link the repo into the agent's skills directory.
+
+```bash
+# Claude Code
+ln -s "$(pwd)" ~/.claude/skills/anim-blob-morph
+# Codex CLI
+ln -s "$(pwd)" ~/.codex/skills/anim-blob-morph
+```
+
+エージェントを再起動すると `description` に基づき自動でマッチします（スキル名: `anim-blob-morph`）。
+Restart the agent; it is matched automatically by the skill's `description` (skill name: `anim-blob-morph`).
+
 ## 仕組み
 
 各 blob は SVG の単一 `<path>`。N 個の制御点 (`data-blob-points`、既定 12) を円周上に配置し、毎フレーム以下で更新する：
